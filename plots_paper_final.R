@@ -8,15 +8,15 @@ library(cowplot)
 source('fun/additional_functions.R')
 
 
-plot_my_results <- function (res, max_lambda) {
+plot_my_results <- function (res, max_lambda, max_prev) {
   
   model1 = res$fit1 
   model2 = res$fit2
   fit1    <- model1$fit
   fit2    <- model2$fit
   dat    <- res$dat
-  if(dat$tsur[1] == 2012) {virus  <- paste0(dat$virus[1],', Darien')}
-  if(dat$tsur[1] == 2017) {virus  <- paste0(dat$virus[1],', Mogue')}
+  if(dat$tsur[1] == 2012) {virus  <- paste0(dat$virus[1],', 2012')}
+  if(dat$tsur[1] == 2017) {virus  <- paste0(dat$virus[1],', 2017')}
   
   RealYexpo <- model1$RealYexpo
   
@@ -38,7 +38,7 @@ plot_my_results <- function (res, max_lambda) {
   foi2 <- extract_foi_summary(res, model2, fit2, dat, RealYexpo) %>%
     mutate (model = 'time_varying')
   foi <- rbind(foi1, foi2)
-  size_text <- 15
+  size_text <- 25
   space_years <- 1 
   if(length(model1$yexpo)>15 ) {space_years <- 2}
   if(length(model1$yexpo)>30 ) {space_years <- 5}
@@ -104,6 +104,7 @@ plot_my_results <- function (res, max_lambda) {
   colnames(PPP_both) <- c("L", "M", "U", "age", 'model')
   
   
+
   
   g2 <-
     ggplot() +
@@ -114,10 +115,11 @@ plot_my_results <- function (res, max_lambda) {
     geom_line  (data=PPP_both, aes(x=age, y= M, color = model)) + 
     scale_fill_brewer(palette = "Set1") +
     scale_color_brewer(palette = "Set1") +
-      geom_point (data=dat, aes(x=age_mean_f, y=prev_obs)) +
+      geom_point (data=dat, aes(x=age_mean_f, y=prev_obs, size = total), 
+                  pch = 21,fill = 'white', color = 'black') +
     xlab("Age, years") +
     ylab("seropositivity") +
-    theme_bw() + coord_cartesian(ylim = c(0,0.6)) +
+    theme_bw() + coord_cartesian(ylim = c(0,max_prev)) +
     theme(axis.text.x = element_text(angle= 0)) +
     theme(
       legend.position="none", 
@@ -137,11 +139,72 @@ plot_my_results <- function (res, max_lambda) {
 }
 
 
-MADV2012 <- readRDS('res/MADV 2012 005.RDS')
-VEEV2012 <- readRDS('res/VEEV 2012 005.RDS')
-MADV2017 <- readRDS('res/MADV 2017 005.RDS')
-UNAV2017 <- readRDS('res/UNA 2017 005.RDS')
-VEEV2017 <- readRDS('res/VEEV 2017 005.RDS')
+# MADV2012 <- readRDS('res/MADV 2012 005.RDS')
+# VEEV2012 <- readRDS('res/VEEV 2012 005.RDS')
+# MADV2017 <- readRDS('res/MADV 2017 005.RDS')
+# UNAV2017 <- readRDS('res/UNA 2017 005.RDS')
+# VEEV2017 <- readRDS('res/VEEV 2017 005.RDS')
+
+# # MADV2012 <- readRDS('res/MADV 2012 010.RDS')
+# # VEEV2012 <- readRDS('res/VEEV 2012 010.RDS')
+# MADV2017 <- readRDS('res/MADV 2017 010.RDS')
+# UNAV2017 <- readRDS('res/UNA 2017 010.RDS')
+# VEEV2017 <- readRDS('res/VEEV 2017 010.RDS')
+
+
+MADV2012_P5_05 <- readRDS('res/MADV 2012 P5 005.RDS')
+MADV2012_P5_10 <- readRDS('res/MADV 2012 P5 010.RDS')
+MADV2012_P6_05 <- readRDS('res/MADV 2012 P6 005.RDS')
+MADV2012_P6_10 <- readRDS('res/MADV 2012 P6 010.RDS')
+MADV2012_P7_05 <- readRDS('res/MADV 2012 P7 005.RDS')
+MADV2012_P7_10 <- readRDS('res/MADV 2012 P7 010.RDS')
+MADV2012_P8_05 <- readRDS('res/MADV 2012 P8 005.RDS')
+MADV2012_P8_10 <- readRDS('res/MADV 2012 P8 010.RDS')
+MADV2012_P9_05 <- readRDS('res/MADV 2012 P9 005.RDS')
+MADV2012_P9_10 <- readRDS('res/MADV 2012 P9 010.RDS')
+
+plot_my_results(MADV2012_P9_10, max_lambda = 0.05, max_prev = 0.6)
+
+gridExtra::grid.arrange(
+  plot_my_results(MADV2012_P5_10, max_lambda = 0.05, max_prev = 0.6),
+  plot_my_results(MADV2012_P6_10, max_lambda = 0.05, max_prev = 0.6),
+  plot_my_results(MADV2012_P7_10, max_lambda = 0.05, max_prev = 0.6),
+  plot_my_results(MADV2012_P8_10, max_lambda = 0.05, max_prev = 0.6),
+  plot_my_results(MADV2012_P9_10, max_lambda = 0.05, max_prev = 0.6),
+  nrow = 1
+)
+
+
+
+VEEV2012_P5_05 <- readRDS('res/VEEV 2012 P5 005.RDS')
+VEEV2012_P5_10 <- readRDS('res/VEEV 2012 P5 010.RDS')
+VEEV2012_P6_05 <- readRDS('res/VEEV 2012 P6 005.RDS')
+VEEV2012_P6_10 <- readRDS('res/VEEV 2012 P6 010.RDS')
+VEEV2012_P7_05 <- readRDS('res/VEEV 2012 P7 005.RDS')
+VEEV2012_P7_10 <- readRDS('res/VEEV 2012 P7 010.RDS')
+VEEV2012_P8_05 <- readRDS('res/VEEV 2012 P8 005.RDS')
+VEEV2012_P8_10 <- readRDS('res/VEEV 2012 P8 010.RDS')
+VEEV2012_P9_05 <- readRDS('res/VEEV 2012 P9 005.RDS')
+VEEV2012_P9_10 <- readRDS('res/VEEV 2012 P9 010.RDS')
+
+plot_my_results(VEEV2012_P6_10, max_lambda = 0.05, max_prev = 0.6)
+
+gridExtra::grid.arrange(
+  plot_my_results(VEEV2012_P5_10, max_lambda = 0.1, max_prev = 1),
+  plot_my_results(VEEV2012_P6_10, max_lambda = 0.1, max_prev = 1),
+  plot_my_results(VEEV2012_P7_05, max_lambda = 0.3, max_prev = 1),
+  plot_my_results(VEEV2012_P8_10, max_lambda = 0.1, max_prev = 1),
+  plot_my_results(VEEV2012_P9_10, max_lambda = 0.1, max_prev = 1),
+  nrow = 1
+)
+
+
+
+
+
+
+
+
 
 library(ggpubr)
 empty_plot <- ggplot(dat = data.frame(x= 1:10, y = 1:10, 
@@ -150,16 +213,17 @@ geom_line(aes(x, y, color = model)) +
 geom_ribbon(aes(x, ymin = y, ymax=y, fill = model), alpha = 0.2) +
   scale_fill_brewer(palette = "Set1") +
   scale_color_brewer(palette = "Set1") +
-  theme(legend.position="right")
-legend_plots <- get_legend(empty_plot)
+  theme(legend.position="right",
+        legend.text=element_text(size=25))
+legend_plots <- get_legend(empty_plot) 
 
 
-png('res/plots.png', width = 480*2, height = 480)
-gridExtra::grid.arrange(plot_my_results(MADV2012, max_lambda = 0.05), 
-                        plot_my_results(VEEV2012, max_lambda = 0.05),
-                        plot_my_results(MADV2017, max_lambda = 0.05),
-                        plot_my_results(VEEV2017, max_lambda = 0.05),
-                        plot_my_results(UNAV2017, max_lambda = 0.05),
+png('res/plots.png', width = 480*3.5, height = 480 * 1.5)
+gridExtra::grid.arrange(plot_my_results(MADV2012, max_lambda = 0.05, max_prev = 0.6), 
+                        plot_my_results(VEEV2012, max_lambda = 0.05, max_prev = 0.6),
+                        plot_my_results(MADV2017, max_lambda = 0.05, max_prev = 0.6),
+                        plot_my_results(VEEV2017, max_lambda = 0.05, max_prev = 0.6),
+                        plot_my_results(UNAV2017, max_lambda = 0.05, max_prev = 0.6),
                         as_ggplot(legend_plots),
                         nrow = 1)
 dev.off()
@@ -225,3 +289,11 @@ write_csv(res_DIC, 'res/res_DIC.csv')
 # extract_ll_DIC(VEEV2012, VEEV2012$fit1$fit, model = 'constant')
 # extract_ll_DIC(MADV2012, MADV2012$fit2$fit, model = 'time-varying')
 
+
+
+ip <- as.data.frame(installed.packages()[,c(1,3:4)])
+rownames(ip) <- NULL
+ip <- ip[is.na(ip$Priority),1:2,drop=FALSE]
+print(ip, row.names=FALSE)
+
+stan_version()

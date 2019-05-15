@@ -5,6 +5,7 @@ library(haven)
 library(dplyr)
 library(reshape2)
 library(Hmisc)
+library(readxl)
 
 rm(list= ls())
 
@@ -143,7 +144,6 @@ formatingData <- function(dat, virus){
   dd$tSur    <- 2012
   dd$pos <- dd$n_pos
   dd$survey <- dd$dataset_id
-  dd$PlaceName <- virus
   
   dd$birth_year <- dd$tSur - dd$age_min
   dd$age_mean_f <- dd$age_min
@@ -170,6 +170,13 @@ formatingData <- function(dat, virus){
   
 
 dat  <- read_excel("data/HH simple 103014_MADV_VEEV_Zulma.xlsx")
+dat1 <- filter(dat, site..6 == 5) %>% 
+dat2 <- filter(dat, site..6 == 6)
+dat3 <- filter(dat, site..6 == 7)
+dat4 <- filter(dat, site..6 == 8)
+dat5 <- filter(dat, site..6 == 9)
+dat6 <- filter(dat, site..6 == 10)
+
 
 MADV2012 <- formatingData(dat, 'MADV')
 VEEV2012 <- formatingData(dat, 'VEEV')

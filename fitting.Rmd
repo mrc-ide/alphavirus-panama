@@ -107,10 +107,11 @@ fFitAndPlot <- function (dat,
 
 
 # ---- Datasets
-dat1 <- readRDS('data/Panama2012.RDS') %>% mutate(id = stringr::str_sub(dataset_id, 1, 3))
-dat2 <- readRDS('data/Panama2017.RDS') %>% mutate(id = stringr::str_sub(dataset_id, 1, 3))
+dat1 <- readRDS('data/Panama2012.RDS') %>% mutate(id = paste('Darien', stringr::str_sub(dataset_id, 1, 3)))
+dat2 <- readRDS('data/Panama2017.RDS') %>% mutate(id = paste('Mogue', stringr::str_sub(dataset_id, 1, 3)))
+dat3 <- readRDS('data/Panama2012_places.RDS') %>% mutate(id = stringr::str_sub(dataset_id, 1, 10))
 
-dat0   <- rbind(dat1, dat2) %>% 
+dat0   <- rbind(dat1, dat2, dat3) %>% 
   mutate(counts = pos,
          survey = paste(virus,tsur, id)) %>%
   arrange(survey)

@@ -29,7 +29,7 @@ model {
   
   for(i in 2:Ymax)
     foi[i] ~ normal(foi[i - 1], sigma);
-  foi[1] ~ normal(0, 1);
+    foi[1] ~ normal(0, 1);
 }
 
 
