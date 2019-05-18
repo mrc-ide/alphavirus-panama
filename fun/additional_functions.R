@@ -1,9 +1,8 @@
 
 # --------- Get exposure matrix
-get_exposure_matrix <- function(dat)
+get_exposure_matrix <- function(dat, yexpo)
 {
   age_class <- dat$age_mean_f
-  yexpo     <- seq_along(min(dat$birth_year):dat$tsur[1]) 
   ly  <- length(yexpo)
   exposure       <- matrix(0,nrow=length(age_class), ncol=ly)   
   for (k in 1:length(age_class)) exposure[k,(ly-age_class[k]+1):ly] <-  1 
@@ -11,6 +10,19 @@ get_exposure_matrix <- function(dat)
   return(exposure_output)
   
 }
+
+get_exposure_matrix_expanded <- function(yexpo_expanded, min_age, max_age)
+{
+  age_class <- min_age:max_age
+  ly  <- length(yexpo_expanded)
+  exposure       <- matrix(0,nrow=length(age_class), ncol=ly)   
+  for (k in 1:length(age_class)) exposure[k,(ly-age_class[k]+1):ly] <-  1 
+  exposure_output <- exposure
+  return(exposure_output)
+  
+}
+
+
 
 make_yexpo <- function(dat) {
   yexpo <- (seq_along(min(dat$birth_year):dat$tsur[1]))
