@@ -20,14 +20,20 @@ library(gridExtra)
 source('fun/additional_functions.R')
 
 
-res <- readRDS('res/mod_decsVEEV 2012 Pi-Pi 010.RDS')
+res <- readRDS('res_final/VEEV 2012 Pi-Pi 010.RDS')
 
-plot_my_results <- function(res, max_lambda=0.3, max_prev=1, horizontal = TRUE){
+plot_my_results <- function(res, 
+                            max_lambda=0.3, 
+                            max_prev=1, 
+                            horizontal = TRUE
+                            ){
   
   
   
   dat    <- res$dat
-  fit    <- res$res$fit
+  mod    <- res$mod1
+  
+  fit    <- mod$fit
   virus     <- dat$virus[1]
   PlaceName <- dat$PlaceName[1]
   if (PlaceName== 'Pi-Pi')  {PlaceName = 'Pirries & Pijivasal'}
@@ -68,7 +74,7 @@ plot_my_results <- function(res, max_lambda=0.3, max_prev=1, horizontal = TRUE){
   g1 <- 
     foi_overt %>% filter(year > 1960) %>%
     ggplot(aes(x=year, y=median)) +
-    geom_ribbon(aes(ymin = lower, ymax = upper), fill = '#6baed6', alpha = .2) +
+    geom_ribbon(aes(ymin = lower, ymax = upper), fill = '#9ecae1', alpha = 1) +
     geom_line(aes(y = median), color = 'blue') +
     scale_fill_brewer("FOI", palette = "Set1") +
     scale_color_brewer("FOI", palette = "Set1") +
@@ -141,7 +147,7 @@ plot_my_results <- function(res, max_lambda=0.3, max_prev=1, horizontal = TRUE){
     geom_errorbar(data=dat, 
                   aes(x=age_mean_f, ymin=prev_obs_lower, ymax = prev_obs_upper),
                   color = 'grey', width = .1) +
-    geom_ribbon(data=PPP_both, aes(x=age, ymin = L, ymax = U), fill = '#6baed6', alpha = .2) +
+    geom_ribbon(data=PPP_both, aes(x=age, ymin = L, ymax = U), fill = '#9ecae1', alpha = 1) +
     geom_line  (data=PPP_both, aes(x=age, y= M), color ='blue') + 
     scale_fill_brewer(palette = "Set1") +
     scale_color_brewer(palette = "Set1") +
