@@ -1,2 +1,1 @@
-# chik-foi
-Alphavirus in Panama
+# Alphavirus in Panama
