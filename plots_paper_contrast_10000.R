@@ -180,7 +180,7 @@ plot_my_results <- function(res,
     geom_point (data=dat, aes(x=age_mean_f, y=prev_obs, size = total), 
                 pch = 21,fill = 'white', color = 'black') +
     xlab("Age, years") +
-    ylab("seropositivity") +
+    ylab("Seropositivity") +
     theme_bw() + coord_cartesian(ylim = c(0,max_prev), xlim = c(1,60)) +
     theme(axis.text.x = element_text(angle= 0)) +
     theme(

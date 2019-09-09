@@ -12,15 +12,12 @@ library(tidyverse)
 library(reshape2)
 library(bayesplot)
 library(loo)
-library(pracma)
+# library(pracma)
 library(cowplot)
 library(grid)
 library(gridExtra)
 
 source('fun/additional_functions.R')
-
-
-res <- readRDS('res_final/VEEV 2012 Pi-Pi 010.RDS')
 
 plot_my_results <- function(res, 
                             max_lambda=0.3, 
@@ -154,7 +151,7 @@ plot_my_results <- function(res,
     geom_point (data=dat, aes(x=age_mean_f, y=prev_obs, size = total), 
                 pch = 21,fill = 'white', color = 'black') +
     xlab("Age, years") +
-    ylab("seropositivity") +
+    ylab("Seropositivity") +
     theme_bw() + coord_cartesian(ylim = c(0,max_prev), xlim = c(3,50)) +
     theme(axis.text.x = element_text(angle= 0)) +
     theme(
@@ -183,31 +180,34 @@ plot_my_results <- function(res,
   
 }
 
-VEEV2012_P1_05 <- readRDS('res/mod_decsVEEV 2012 Pi-Pi 005.RDS')
-VEEV2012_P1_10 <- readRDS('res/mod_decsVEEV 2012 Pi-Pi 010.RDS')
-VEEV2012_P2_05 <- readRDS('res/mod_decsVEEV 2012 Merca 005.RDS')
-VEEV2012_P2_10 <- readRDS('res/mod_decsVEEV 2012 Merca 010.RDS')
-VEEV2012_P3_05 <- readRDS('res/mod_decsVEEV 2012 Tamar 005.RDS')
-VEEV2012_P3_10 <- readRDS('res/mod_decsVEEV 2012 Tamar 010.RDS')
-VEEV2012_P4_05 <- readRDS('res/mod_decsVEEV 2012 Real 005.RDS')
-VEEV2012_P4_10 <- readRDS('res/mod_decsVEEV 2012 Real 010.RDS')
-VEEV2012_P5_05 <- readRDS('res/mod_decsVEEV 2012 Aruza 005.RDS')
-VEEV2012_P5_10 <- readRDS('res/mod_decsVEEV 2012 Aruza 010.RDS')
-VEEV2017_P6_05 <- readRDS('res/mod_decsVEEV 2017 Mogue 005.RDS')
-VEEV2017_P6_10 <- readRDS('res/mod_decsVEEV 2017 Mogue 010.RDS')
+res <- readRDS('res_final/VEEV 2012 Pi-Pi 010.RDS')
 
-MADV2012_P1_05 <- readRDS('res/mod_decsMADV 2012 Pi-Pi 005.RDS')
-MADV2012_P1_10 <- readRDS('res/mod_decsMADV 2012 Pi-Pi 010.RDS')
-MADV2012_P2_05 <- readRDS('res/mod_decsMADV 2012 Merca 005.RDS')
-MADV2012_P2_10 <- readRDS('res/mod_decsMADV 2012 Merca 010.RDS')
-MADV2012_P3_05 <- readRDS('res/mod_decsMADV 2012 Tamar 005.RDS')
-MADV2012_P3_10 <- readRDS('res/mod_decsMADV 2012 Tamar 010.RDS')
-MADV2012_P4_05 <- readRDS('res/mod_decsMADV 2012 Real 005.RDS')
-MADV2012_P4_10 <- readRDS('res/mod_decsMADV 2012 Real 010.RDS')
-MADV2012_P5_05 <- readRDS('res/mod_decsMADV 2012 Aruza 005.RDS')
-MADV2012_P5_10 <- readRDS('res/mod_decsMADV 2012 Aruza 010.RDS')
-MADV2017_P6_05 <- readRDS('res/mod_decsMADV 2017 Mogue 005.RDS')
-MADV2017_P6_10 <- readRDS('res/mod_decsMADV 2017 Mogue 010.RDS')
+
+VEEV2012_P1_05 <- readRDS('res_final/VEEV 2012 Pi-Pi 005.RDS')
+VEEV2012_P1_10 <- readRDS('res_final/VEEV 2012 Pi-Pi 010.RDS')
+VEEV2012_P2_05 <- readRDS('res_final/VEEV 2012 Merca 005.RDS')
+VEEV2012_P2_10 <- readRDS('res_final/VEEV 2012 Merca 010.RDS')
+VEEV2012_P3_05 <- readRDS('res_final/VEEV 2012 Tamar 005.RDS')
+VEEV2012_P3_10 <- readRDS('res_final/VEEV 2012 Tamar 010.RDS')
+VEEV2012_P4_05 <- readRDS('res_final/VEEV 2012 Real 005.RDS')
+VEEV2012_P4_10 <- readRDS('res_final/VEEV 2012 Real 010.RDS')
+VEEV2012_P5_05 <- readRDS('res_final/VEEV 2012 Aruza 005.RDS')
+VEEV2012_P5_10 <- readRDS('res_final/VEEV 2012 Aruza 010.RDS')
+VEEV2017_P6_05 <- readRDS('res_final/VEEV 2017 Mogue 005.RDS')
+VEEV2017_P6_10 <- readRDS('res_final/VEEV 2017 Mogue 010.RDS')
+
+MADV2012_P1_05 <- readRDS('res_final/MADV 2012 Pi-Pi 005.RDS')
+MADV2012_P1_10 <- readRDS('res_final/MADV 2012 Pi-Pi 010.RDS')
+MADV2012_P2_05 <- readRDS('res_final/MADV 2012 Merca 005.RDS')
+MADV2012_P2_10 <- readRDS('res_final/MADV 2012 Merca 010.RDS')
+MADV2012_P3_05 <- readRDS('res_final/MADV 2012 Tamar 005.RDS')
+MADV2012_P3_10 <- readRDS('res_final/MADV 2012 Tamar 010.RDS')
+MADV2012_P4_05 <- readRDS('res_final/MADV 2012 Real 005.RDS')
+MADV2012_P4_10 <- readRDS('res_final/MADV 2012 Real 010.RDS')
+MADV2012_P5_05 <- readRDS('res_final/MADV 2012 Aruza 005.RDS')
+MADV2012_P5_10 <- readRDS('res_final/MADV 2012 Aruza 010.RDS')
+MADV2017_P6_05 <- readRDS('res_final/MADV 2017 Mogue 005.RDS')
+MADV2017_P6_10 <- readRDS('res_final/MADV 2017 Mogue 010.RDS')
 
 
 
