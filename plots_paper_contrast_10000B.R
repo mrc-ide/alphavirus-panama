@@ -35,7 +35,7 @@ plot_my_results <- function(res,
   
   virus     <- dat$virus[1]
   PlaceName <- dat$PlaceName[1]
-  if (PlaceName== 'Pi-Pi')  {PlaceName = 'Pirries & Pijivasal'}
+  if (PlaceName== 'Pi-Pi')  {PlaceName = 'Pirre 1-2 & Pijibasal'}
   if (PlaceName== 'Tamar')  {PlaceName = 'Tamarindo'}
   if (PlaceName== 'Merca')  {PlaceName = 'Mercadeo'}
   if (PlaceName== 'Real')   {PlaceName = 'El Real'}
@@ -87,7 +87,8 @@ plot_my_results <- function(res,
     theme(
       legend.position="none", 
       text = element_text(size=size_text),
-      plot.title = element_text(size = size_text*.8, face = "bold")) +
+      plot.title = element_text(size = size_text*.8, face = "bold"),
+      plot.subtitle = element_text(size = size_text*.8, face = "bold")) +
     theme(panel.border = element_blank(), panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) +
     theme(axis.text.x = element_text(angle=90, vjust=0.5)) +
@@ -184,13 +185,17 @@ plot_my_results <- function(res,
     theme(
       legend.position="none", 
       text = element_text(size=size_text),
-      plot.title = element_text(size = size_text*.8, face = "bold")) +
+      plot.title = element_text(size = size_text*.8, face = "bold"),
+      plot.subtitle = element_text(size = size_text*.8, face = "bold")) +
     theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) 
+          panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
   
+  
+
+
   if (include_labels == TRUE) {
-    g2 <- g2 + xlab("Age (years)") + ylab("Seropositivity")
-    g1 <- g1 + xlab("Years") + ylab("FOI")
+    g2 <- g2 + xlab("Age (years)") + ylab("Seropositivity") + labs(subtitle = 'B')
+    g1 <- g1 + xlab("Years") + ylab("FOI")  + labs(subtitle = 'A')
   } else {
     g2 <- g2 + xlab("") + ylab("")
     g1 <- g1 + xlab("") + ylab("")
@@ -246,8 +251,6 @@ title2=textGrob("MADV", gp=gpar(fontface="bold"))
 png("res_final_10000/foi_VEEV_5y_horizontal_final.png",
     width = 350 *6, height = 350 *2)
 
-
-
 gridExtra::grid.arrange(
   plot_my_results(VP1_05, max_lambda = 0.2, max_prev = 1, horizontal = FALSE),
   plot_my_results(VP2_05, max_lambda = 0.2, max_prev = 1, horizontal = FALSE, include_labels = FALSE) ,
@@ -272,7 +275,7 @@ gridExtra::grid.arrange(
   plot_my_results(MP5_05, max_lambda = 0.1, max_prev = 1, horizontal = FALSE, include_labels = FALSE) ,
   plot_my_results(MP6_05, max_lambda = 0.1, max_prev = 1, horizontal = FALSE, include_labels = FALSE) ,
   nrow = 1)
-)
+
 
 dev.off()
 
