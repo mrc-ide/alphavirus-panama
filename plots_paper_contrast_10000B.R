@@ -235,8 +235,11 @@ MP6_05 <- readRDS('res_final_10000/MADV 2017 Mogue 005.RDS')
 UP6_05 <- readRDS('res_final_10000/UNAV 2017 Mogue 005.RDS')
 
 
-png("res_final_10000/foi_UNAV_5y_horizontal_final.png",
-    width = 350 *1, height = 350 *2)
+tiff("res_final_10000/foi_UNAV_final.tiff",
+     width = 350 *1, height = 350 *2)
+
+# png("res_final_10000/foi_UNAV_5y_horizontal_final.png",
+#     width = 350 *1, height = 350 *2)
 plot_my_results(UP6_05, max_lambda = 0.1, max_prev = 1, horizontal = FALSE)
 dev.off()
 
@@ -246,10 +249,11 @@ dev.off()
 title1=textGrob("VEEV", gp=gpar(fontface="bold"))
 title2=textGrob("MADV", gp=gpar(fontface="bold"))
 
+tiff("res_final_10000/foi_VEEV_final.tiff",
+     width = 350 *6, height = 350 *2)
 
-
-png("res_final_10000/foi_VEEV_5y_horizontal_final.png",
-    width = 350 *6, height = 350 *2)
+# png("res_final_10000/foi_VEEV_5y_horizontal_final.png",
+#     width = 350 *6, height = 350 *2)
 
 gridExtra::grid.arrange(
   plot_my_results(VP1_05, max_lambda = 0.2, max_prev = 1, horizontal = FALSE),
@@ -264,8 +268,11 @@ gridExtra::grid.arrange(
 dev.off()
 
 
-png("res_final_10000/foi_MADV_5y_horizontal_final.png",
-    width = 350 *6, height = 350 *2)
+tiff("res_final_10000/foi_MADV_final.tiff",
+     width = 350 *6, height = 350 *2)
+
+# png("res_final_10000/foi_MADV_5y_horizontal_final.png",
+#     width = 350 *6, height = 350 *2)
 
 gridExtra::grid.arrange(
   plot_my_results(MP1_05, max_lambda = 0.1, max_prev = 1, horizontal = FALSE),
