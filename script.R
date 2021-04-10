@@ -69,7 +69,7 @@ dd$netspec   <- 1
 dd$netspec   <- 1 
 dd$age_mean_f <-  dd$age_mean
 dd$tSur   <- 2017
-dd$tSur    <- 2017
+
 
 
 saveRDS(dd, 'data/Panama.RDS')
