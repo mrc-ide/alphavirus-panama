@@ -1,4 +1,4 @@
-# Alphavirus in Panama
+# Endemic and Epidemic Human Alphavirus in Panama
 
 Published paper
 
